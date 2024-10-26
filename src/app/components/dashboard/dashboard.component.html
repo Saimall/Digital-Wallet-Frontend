@@ -1,0 +1,49 @@
+<div class="dashboard-container">
+    <div style="background-color: cornsilk;"> 
+    <mat-card class="auth-card" >
+      <mat-card-header>
+        <mat-card-title class="text-center">{{ isRegistering ? 'Register' : 'Login' }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="isRegistering ? registerUser() : validateUser()">
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Enter your username" formControlName="username" required>
+            <mat-error *ngIf="form.get('username')?.invalid && (form.get('username')?.dirty || form.get('username')?.touched)">
+              <small *ngIf="form.get('username')?.errors?.['required']">Username is required.</small>
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Enter your password" formControlName="password" required>
+            <mat-error *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)">
+              <small *ngIf="form.get('password')?.errors?.['required']">Password is required.</small>
+            </mat-error>
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline" class="full-width" *ngIf="isRegistering">
+            <mat-label>Family ID</mat-label>
+            <input matInput placeholder="Enter your family ID" formControlName="familyid" required>
+            <mat-error *ngIf="form.get('familyid')?.invalid && (form.get('familyid')?.dirty || form.get('familyid')?.touched)">
+              <small *ngIf="form.get('familyid')?.errors?.['required']">Family ID is required.</small>
+            </mat-error>
+          </mat-form-field>
+  
+          <div class="button-container">
+            <button mat-raised-button color="primary" type="submit" class="auth-button">
+              {{ isRegistering ? 'Register' : 'Login' }}
+            </button>
+          </div>
+          
+          <div class="toggle-link text-center">
+            <a href="#" (click)="toggleRegister()" class="link-style">
+              {{ isRegistering ? 'Already have an account? Login' : 'Don’t have an account? Register' }}
+            </a>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+</div>
+  </div>

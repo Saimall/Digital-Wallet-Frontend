@@ -1,0 +1,63 @@
+/* styles.css or your component CSS file */
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif; /* Stylish font */
+    background:  #032531; /* Soft blue gradient background */
+  }
+  
+  .dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+  }
+  
+  .auth-card {
+    width: 380px; /* Card width */
+    border-radius: 16px; /* Rounded corners */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Strong shadow for depth */
+    background-color: #ffffff; /* White background for the card */
+    padding: 20px 30px; /* Padding inside the card */
+  }
+  
+  .text-center {
+    text-align: center; /* Center text */
+    color: #1976d2; /* Primary color for the title */
+    font-size: 24px; /* Larger font size for the title */
+    margin-bottom: 20px; /* Space below the title */
+  }
+  
+  .full-width {
+    width: 100%; /* Full width for form fields */
+  }
+  
+  .button-container {
+    margin-top: 20px; /* Space above the button */
+  }
+  
+  .auth-button {
+    width: 100%; /* Full width button */
+    padding: 12px; /* Padding for button */
+    font-size: 16px; /* Larger font size for readability */
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s ease, transform 0.2s; /* Smooth transitions */
+    background-color: #1976d2; /* Primary color */
+    color: white; /* White text color */
+  }
+  
+  .auth-button:hover {
+    background-color: #0d47a1; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight upward movement on hover */
+  }
+  
+  .link-style {
+    color: #1976d2; /* Primary color for the link */
+    text-decoration: none; /* No underline */
+    font-weight: 500; /* Semi-bold text */
+  }
+  
+  .link-style:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: #0d47a1; /* Darker shade on hover */
+  }
