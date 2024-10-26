@@ -1,3 +1,15 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span class="welcome-message">Welcome to Digital Wallet</span>
+      <span class="spacer"></span> <!-- This spacer takes up remaining space -->
+      <div class="example-button-row">
+        <button mat-flat-button (click)="logout()">Logout</button>
+       
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  
 <div class="container">
     <mat-card *ngFor="let card of cards" class="card" color="primary">
       <mat-card-header>
@@ -9,7 +21,7 @@
       <mat-card-actions>
         <div style="display: flex; justify-content: space-between; width: 100%;">
             <button mat-button color="accent" (click)="view(card)"><mat-icon>visibility</mat-icon> View</button>
-            <button mat-button color="accent" (click)="edit(card)"><mat-icon>edit</mat-icon> Edit</button>
+            <!-- <button mat-button color="accent" (click)="edit(card)"><mat-icon>edit</mat-icon> Edit</button> -->
             <button mat-button color="accent" (click)="add(card)"><mat-icon>add</mat-icon> Add</button>
         </div>
     </mat-card-actions>

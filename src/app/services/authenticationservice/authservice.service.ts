@@ -6,7 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
   private tokenKey = 'auth';
-
+  private familyid: string ="";
   
   setToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
@@ -14,6 +14,8 @@ export class AuthService {
 
  
   getToken(): string | null {
+    console.log("Key",this.tokenKey);
+    console.log("Key",localStorage.getItem(this.tokenKey));
     return localStorage.getItem(this.tokenKey);
   }
 
@@ -21,13 +23,21 @@ export class AuthService {
   removeToken(): void {
     localStorage.removeItem(this.tokenKey);
   }
+  setFamilyId(familyid: string): void {
+    this.familyid = familyid;
+  }
+
+  getFamilyId(): string {
+    return this.familyid; // Returns the family ID
+  }
 
  
   isAuthenticated(): boolean {
     const token = this.getToken();
+    console.log(token);
     if (token) {
       const decoded: any = jwtDecode(token);
-      return decoded.exp * 1000 > Date.now(); // Check if token is expired
+      return decoded.exp * 1000 > Date.now(); 
     }
     return false;
   }

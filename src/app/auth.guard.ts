@@ -1,8 +1,10 @@
 import { CanActivateFn } from '@angular/router';
-
+//npm install jwt-decode,
+//ng generate service auth
+//>ng generate guard auth
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { AuthService } from './services/authservice.service';
+import { AuthService } from './services/authenticationservice/authservice.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,8 @@ export class AuthGuard implements CanActivate {
       return true; // User is authenticated
     }
     
-    // Redirect to login if not authenticated
-    this.router.navigate(['/login']);
+   
+    this.router.navigate(['']);
     return false;
   }
 }

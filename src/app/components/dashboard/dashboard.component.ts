@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/userservice/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/authenticationservice/authservice.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,12 +13,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class DashboardComponent {
   form: FormGroup;
   isRegistering: boolean = false;
+  authService: any;
 
   constructor(
     private router: Router,
     private userService: UserService,
     private snackBar: MatSnackBar,
-    private fb: FormBuilder
+    private fb: FormBuilder,private authservice:AuthService
   ) {
     this.form = this.fb.group({
       username: ['', Validators.required],
@@ -30,7 +32,6 @@ export class DashboardComponent {
     console.log(this.form.value)
     this.userService.validateUser(this.form.value.username, this.form.value.password).subscribe({
       next: (response) => {
-
         localStorage.setItem("auth",response.message)
         this.snackBar.open('User validated successfully!', 'Close', {
           duration: 3000,
@@ -49,6 +50,7 @@ export class DashboardComponent {
     console.log(this.form.value)
     this.userService.register(this.form.value).subscribe({ // Pass the entire form value
       next: () => {
+        this.authservice.setFamilyId(this.form.value.familyid);
         this.snackBar.open('User registered successfully!', 'Close', {
           duration: 3000,
         });
