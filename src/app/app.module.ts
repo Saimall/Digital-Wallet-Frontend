@@ -22,6 +22,8 @@ import { AtmmoduleModule } from './atmmodule/atmmodule.module';
 import { OttModule } from './ottmodule/ott.module';
 import { FoodmoduleModule } from './foodmodule/foodmodule.module';
 
+import { MedicalmoduleModule } from './medicalmodule/medicalmodule.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +43,8 @@ import { FoodmoduleModule } from './foodmodule/foodmodule.module';
     MatToolbarModule,
     AtmmoduleModule,
     OttModule,
-    FoodmoduleModule
+    FoodmoduleModule,
+    MedicalmoduleModule
   ],
   providers: [
     provideHttpClient(),

@@ -9,6 +9,8 @@ import { AtmCardComponent } from './atmmodule/atmcomponent/atmcomponent.componen
 import { AtmlistcomponentComponent } from './atmmodule/atmlistcomponent/atmlistcomponent.component';
 import { OttcomponentComponent } from './ottmodule/ottcomponent/ottcomponent.component';
 import { OttlistcomponentComponent } from './ottmodule/ottlistcomponent/ottlistcomponent.component';
+import { MedicalcomponentComponent } from './medicalmodule/medicalcomponent/medicalcomponent.component';
+import { MedicallistcomponentComponent } from './medicalmodule/medicallistcomponent/medicallistcomponent.component';
 const routes: Routes = [
   {path:"",component:DashboardComponent},
   {path:"home",component:HomeComponent,canActivate: [AuthGuard]},
@@ -21,6 +23,9 @@ const routes: Routes = [
   { path: 'food/add', component: FoodcomponentComponent,canActivate: [AuthGuard] }, 
   { path: 'food/list/:familyid', component: FoodlistcomponentComponent,canActivate:[AuthGuard] },
   { path: 'food/edit/:number', component: FoodcomponentComponent ,canActivate: [AuthGuard]},
+  { path: 'medical/add', component: MedicalcomponentComponent,canActivate: [AuthGuard] }, 
+  { path: 'medical/list/:familyid', component: MedicallistcomponentComponent,canActivate:[AuthGuard] },
+  { path: 'medical/edit/:number', component: MedicalcomponentComponent ,canActivate: [AuthGuard]},
 
 
   //always give ** pat at the end
