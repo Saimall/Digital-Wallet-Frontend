@@ -64,12 +64,12 @@ body {
 
 
   /* styles.css or example.component.css */
-.success-snackbar {
+  .mat-snack-bar.success-snackbar {
   background-color: green; /* Change to your preferred shade */
   color: white;
 }
 
-.error-snackbar {
+.mat-snack-bar.error-snackbar {
   background-color: red; /* Change to your preferred shade */
   color: white;
 }

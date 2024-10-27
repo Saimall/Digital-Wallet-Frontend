@@ -19,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon'; // Import MatIconModule
 
 import { AtmmoduleModule } from './atmmodule/atmmodule.module';
-
+import { OttModule } from './ottmodule/ott.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,8 @@ import { AtmmoduleModule } from './atmmodule/atmmodule.module';
     BrowserAnimationsModule,
     MatIconModule,
     MatToolbarModule,
-    AtmmoduleModule
+    AtmmoduleModule,
+    OttModule
   ],
   providers: [
     provideHttpClient(),
