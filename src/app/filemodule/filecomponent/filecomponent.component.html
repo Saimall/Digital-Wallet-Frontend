@@ -1,0 +1,47 @@
+<div class="atm-card-form">
+    <h4 class="form-title">{{ isEditMode ? 'Edit File Card' : 'Add File Card' }}</h4>
+    <form [formGroup]="fileform" (ngSubmit)="onSubmit()" class="form-container">
+  
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>File Number</mat-label>
+          <input matInput formControlName="number" required />
+          <mat-error *ngIf="fileform.get('number')?.hasError('required')">File Number is required.</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" required />
+          <mat-error *ngIf="fileform.get('name')?.hasError('required')">Name is required.</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Entity Name</mat-label>
+          <input matInput formControlName="entityname" required />
+          <mat-error *ngIf="fileform.get('entityname')?.hasError('required')">Entity name is required.</mat-error>
+        </mat-form-field>
+  
+        <div class="form-field">
+          <mat-label>Upload File</mat-label>
+          <input type="file" (change)="onFileSelected($event)" accept="application/pdf" required />
+          <mat-error *ngIf="!selectedFile">File is required.</mat-error>
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Description</mat-label>
+          <input matInput formControlName="description" required />
+          <mat-error *ngIf="fileform.get('description')?.hasError('required')">Description is required.</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <button mat-stroked-button color="primary" class="submit-button" type="submit">
+        <mat-icon>save</mat-icon>
+        {{ isEditMode ? 'Update Card' : 'Add Card' }}
+      </button>
+    </form>
+  </div>
+  

@@ -13,6 +13,8 @@ import { MedicalcomponentComponent } from './medicalmodule/medicalcomponent/medi
 import { MedicallistcomponentComponent } from './medicalmodule/medicallistcomponent/medicallistcomponent.component';
 import { RtocomponentComponent } from './rtomodule/rtocomponent/rtocomponent.component';
 import { RtolistcomponentComponent } from './rtomodule/rtolistcomponent/rtolistcomponent.component';
+import { FilecomponentComponent } from './filemodule/filecomponent/filecomponent.component';
+import { FilelistcomponentComponent } from './filemodule/filelistcomponent/filelistcomponent.component';
 const routes: Routes = [
   {path:"",component:DashboardComponent},
   {path:"home",component:HomeComponent,canActivate: [AuthGuard]},
@@ -31,6 +33,9 @@ const routes: Routes = [
   { path: 'rto/add', component: RtocomponentComponent,canActivate: [AuthGuard] }, 
   { path: 'rto/list/:familyid', component: RtolistcomponentComponent,canActivate:[AuthGuard] },
   { path: 'rto/edit/:number', component: RtocomponentComponent ,canActivate: [AuthGuard]},
+  { path: 'files/add', component: FilecomponentComponent,canActivate: [AuthGuard] }, 
+  { path: 'files/list/:familyid', component: FilelistcomponentComponent,canActivate:[AuthGuard] },
+  { path: 'files/edit/:number', component: FilecomponentComponent ,canActivate: [AuthGuard]},
 
 
 
