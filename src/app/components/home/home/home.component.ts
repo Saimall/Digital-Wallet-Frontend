@@ -8,7 +8,8 @@ import { AuthService } from '../../../services/authenticationservice/authservice
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  familyid: number=0;
+  familyid: number =0;
+
 
 
   constructor(private router: Router, private authService: AuthService) {}
@@ -26,8 +27,9 @@ export class HomeComponent {
  
  
   view(card: any) {
-    this.familyid = Number(this.authService.getFamilyId()); 
-    console.log(this.familyid);
+    this.familyid=Number(localStorage.getItem("familyid"));
+
+    console.log("Familyid inside home",this.familyid);
     console.log("Authentication in service",this.authService.isAuthenticated());
     
     this.router.navigate([`${card.action}/list/${this.familyid}`]);

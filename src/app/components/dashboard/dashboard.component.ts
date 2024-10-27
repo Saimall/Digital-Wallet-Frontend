@@ -32,7 +32,9 @@ export class DashboardComponent {
     console.log(this.form.value)
     this.userService.validateUser(this.form.value.username, this.form.value.password).subscribe({
       next: (response) => {
-        localStorage.setItem("auth",response.message)
+       
+        localStorage.setItem("auth",response.message);
+        localStorage.setItem("familyid", response.familyid);
         this.snackBar.open('User validated successfully!', 'Close', {
           duration: 3000,
         });

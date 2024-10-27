@@ -6,7 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
   private tokenKey = 'auth';
-  private familyid: string ="";
+  private familyid: number =0;
   
   setToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
@@ -21,14 +21,16 @@ export class AuthService {
 
   
   removeToken(): void {
+    localStorage.removeItem("familyid");
     localStorage.removeItem(this.tokenKey);
   }
-  setFamilyId(familyid: string): void {
+  setFamilyId(familyid: number): void {
     this.familyid = familyid;
+    localStorage.setItem("familyid",String(familyid));
   }
 
-  getFamilyId(): string {
-    return this.familyid; // Returns the family ID
+  getFamilyId(): number {
+   return Number(localStorage.getItem("familyid"));
   }
 
  

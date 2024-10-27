@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AtmService } from '../../services/atmservice/atmservice.service';
+import { AuthService } from '../../services/authenticationservice/authservice.service';
 
 @Component({
   selector: 'app-atmlistcomponent',
@@ -10,10 +11,10 @@ import { AtmService } from '../../services/atmservice/atmservice.service';
 export class AtmlistcomponentComponent {
 
   atmCards: any[] = [];
-  familyid: number=0;
+  familyid:number=0;
 
-  constructor(private atmService: AtmService, private router: Router, private route: ActivatedRoute) {}
-
+  constructor(private atmService: AtmService, private router: Router, private route: ActivatedRoute,private authservice:AuthService) {}
+  
   ngOnInit(): void {
     
     this.route.params.subscribe(params => {
@@ -24,6 +25,7 @@ export class AtmlistcomponentComponent {
   }
 
   loadAtmCards() {
+    this.familyid= Number(localStorage.getItem("familyid"));
     this.atmService.getAtmCards(this.familyid).subscribe(cards => {
       this.atmCards = cards;
     });
