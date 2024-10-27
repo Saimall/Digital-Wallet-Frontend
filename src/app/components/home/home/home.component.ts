@@ -18,7 +18,6 @@ export class HomeComponent {
   cards = [
     { title: 'ATM Cards', description: 'Manage your ATM cards', action: 'atm' },
     { title: 'OTT', description: 'Manage your OTT subscriptions', action: 'ott' },
-    { title: 'Medical Cards', description: 'Manage your medical cards', action: 'medical' },
     { title: 'Files', description: 'Upload and manage files', action: 'files' },
     { title: 'Healthcards', description: 'Manage your health cards', action: 'health' },
     { title: 'RTO Cards', description: 'Manage your RTO cards', action: 'rto' },
