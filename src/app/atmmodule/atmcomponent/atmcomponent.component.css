@@ -55,6 +55,18 @@
             mat-icon {
               margin-right: 8px; 
             }
+
+
+
+            .success-snackbar {
+              background-color: green; /* Change to your preferred shade */
+              color: white;
+            }
+            
+            .error-snackbar {
+              background-color: red; /* Change to your preferred shade */
+              color: white;
+            }
           
           
       

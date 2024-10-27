@@ -24,6 +24,9 @@ export class AtmService {
   addAtmCard(atmCard: Atmmodel): Observable<Atmmodel> {
     return this.http.post<Atmmodel>(`${this.baseUrl}/add`, atmCard, { headers: this.getHeaders() });
   }
+  getAtmcard(number:number):Observable<Atmmodel>{
+   return this.http.get<Atmmodel>(`${this.baseUrl}/getbynumber/${number}`,{headers: this.getHeaders()}); 
+  }
 
   getAtmCards(familyid: number): Observable<Atmmodel[]> {
     return this.http.get<Atmmodel[]>(`${this.baseUrl}/get/${familyid}`, { headers: this.getHeaders() });

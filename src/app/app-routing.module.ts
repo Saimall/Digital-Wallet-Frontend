@@ -10,10 +10,9 @@ import { AtmlistcomponentComponent } from './atmmodule/atmlistcomponent/atmlistc
 const routes: Routes = [
   {path:"",component:DashboardComponent},
   {path:"home",component:HomeComponent,canActivate: [AuthGuard]},
- 
   { path: 'atm/add', component: AtmCardComponent,canActivate: [AuthGuard] }, 
   { path: 'atm/list/:familyid', component: AtmlistcomponentComponent,canActivate:[AuthGuard] },
-  { path: 'atm/edit/:id', component: AtmCardComponent ,canActivate: [AuthGuard]},
+  { path: 'atm/edit/:number', component: AtmCardComponent ,canActivate: [AuthGuard]},
 
 
   //always give ** pat at the end

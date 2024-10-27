@@ -31,18 +31,25 @@ export class DashboardComponent {
   validateUser() {
     console.log(this.form.value)
     this.userService.validateUser(this.form.value.username, this.form.value.password).subscribe({
+      
       next: (response) => {
        
         localStorage.setItem("auth",response.message);
         localStorage.setItem("familyid", response.familyid);
         this.snackBar.open('User validated successfully!', 'Close', {
           duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass:"success-snackbar"
         });
         this.router.navigate(['/home']);
       },
       error: error => {
         this.snackBar.open('Invalid username or password', 'Close', {
           duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass:"error-snackbar"
         });
       }
     });
@@ -55,6 +62,9 @@ export class DashboardComponent {
         this.authservice.setFamilyId(this.form.value.familyid);
         this.snackBar.open('User registered successfully!', 'Close', {
           duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass:"success-snackbar"
         });
         this.isRegistering = false; 
         this.form.reset(); 
@@ -63,6 +73,9 @@ export class DashboardComponent {
         console.log(error)
         this.snackBar.open('Registration failed', 'Close', {
           duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass:"error-snackbar"
         });
       }
     });

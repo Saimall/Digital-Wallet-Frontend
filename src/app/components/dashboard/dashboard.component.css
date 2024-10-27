@@ -61,3 +61,15 @@ body {
     text-decoration: underline; /* Underline on hover */
     color: #0d47a1; /* Darker shade on hover */
   }
+
+
+  /* styles.css or example.component.css */
+.success-snackbar {
+  background-color: green; /* Change to your preferred shade */
+  color: white;
+}
+
+.error-snackbar {
+  background-color: red; /* Change to your preferred shade */
+  color: white;
+}

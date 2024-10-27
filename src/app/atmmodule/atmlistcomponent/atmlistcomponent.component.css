@@ -133,5 +133,14 @@
   .mat-card-content .value {
     color: #333; /* Darker color for values */
   }
+  .success-snackbar {
+    background-color: green; 
+    color: white;
+  }
+  
+  .error-snackbar {
+    background-color: red;
+    color: white;
+  }
   
   
