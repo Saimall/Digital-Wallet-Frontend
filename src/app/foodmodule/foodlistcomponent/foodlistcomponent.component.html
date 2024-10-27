@@ -1,0 +1,22 @@
+<div class="atm-list">
+    <h4>Your Food Cards!!</h4>
+    <div class="card-container">
+      <mat-card *ngFor="let card of foodCards" class="atm-card">
+        <mat-card-header>
+          <mat-card-title>{{ card.username }}</mat-card-title>
+          <mat-card-subtitle><b>{{ card.number }}</b></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>EntityName: {{ card.entityname }}</p>
+          <p>Issue Date: {{ card.issueDate | date }}</p>
+          <p>Expire Date: {{ card.expireDate | date }}</p>
+        </mat-card-content>
+        <mat-card-actions class="mat-card-actions">
+           
+            <button mat-stroked-button color="primary" class="submit-button" (click)="editCard(card)">Edit</button>
+            <button mat-stroked-button color="warn" class="submit-button color-warn" (click)="deleteCard(card.number)">Delete</button>
+            
+        </mat-card-actions>
+      </mat-card>
+    </div>
+</div>

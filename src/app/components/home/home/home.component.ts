@@ -21,7 +21,8 @@ export class HomeComponent {
     { title: 'Medical Cards', description: 'Manage your medical cards', action: 'medical' },
     { title: 'Files', description: 'Upload and manage files', action: 'files' },
     { title: 'Healthcards', description: 'Manage your health cards', action: 'health' },
-    { title: 'RTO Cards', description: 'Manage your RTO cards', action: 'rto' }
+    { title: 'RTO Cards', description: 'Manage your RTO cards', action: 'rto' },
+    { title: 'Food Cards', description: 'Manage your Food cards', action: 'food' }
   ];
   
  

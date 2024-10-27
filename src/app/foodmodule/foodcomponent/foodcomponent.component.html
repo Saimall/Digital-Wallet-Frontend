@@ -1,0 +1,57 @@
+
+<div class="atm-card-form">
+    <h4 class="form-title">{{ isEditMode ? 'Edit Food Card' : 'Add Food Card' }}</h4>
+    <form [formGroup]="foodform" (ngSubmit)="onSubmit()" class="form-container">
+  
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Card Number</mat-label>
+          <input matInput formControlName="number" required />
+          <mat-error *ngIf="foodform.get('number')?.hasError('required')">Card Number is required.</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" required />
+          <mat-error *ngIf="foodform.get('username')?.hasError('required')">Username is required.</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="form-row">
+        <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Expire Date</mat-label>
+            <input matInput [matDatepicker]="expireDatePicker" formControlName="expireDate" required />
+            <mat-datepicker-toggle matSuffix [for]="expireDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #expireDatePicker></mat-datepicker>
+            <mat-error *ngIf="foodform.get('expireDate')?.hasError('required')">Expire Date is required.</mat-error>
+          </mat-form-field>
+       
+  
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Issue Date</mat-label>
+          <input matInput [matDatepicker]="issueDatePicker" formControlName="issueDate" required />
+          <mat-datepicker-toggle matSuffix [for]="issueDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #issueDatePicker></mat-datepicker>
+          <mat-error *ngIf="foodform.get('issueDate')?.hasError('required')">Issue Date is required.</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="form-row">
+        
+        <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Entity Name</mat-label>
+            <input matInput formControlName="entityname" required />
+            <mat-error *ngIf="foodform.get('entityname')?.hasError('required')">Entity name is required.</mat-error>
+          </mat-form-field>
+  
+        
+      </div>
+      
+  
+      <button mat-stroked-button color="primary" class="submit-button" type="submit">
+        <mat-icon>save</mat-icon>
+        {{ isEditMode ? 'Update Card' : 'Add Card' }}
+      </button>
+    </form>
+  </div>
+  

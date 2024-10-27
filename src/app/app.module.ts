@@ -20,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon'; // Import MatIconModule
 
 import { AtmmoduleModule } from './atmmodule/atmmodule.module';
 import { OttModule } from './ottmodule/ott.module';
+import { FoodmoduleModule } from './foodmodule/foodmodule.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { OttModule } from './ottmodule/ott.module';
     MatIconModule,
     MatToolbarModule,
     AtmmoduleModule,
-    OttModule
+    OttModule,
+    FoodmoduleModule
   ],
   providers: [
     provideHttpClient(),
