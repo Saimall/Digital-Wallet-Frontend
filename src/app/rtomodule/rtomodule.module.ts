@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AtmCardComponent } from './atmcomponent/atmcomponent.component';
+import { RtocomponentComponent } from './rtocomponent/rtocomponent.component';
+import { RtolistcomponentComponent } from './rtolistcomponent/rtolistcomponent.component';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -8,14 +10,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import { AtmlistcomponentComponent } from './atmlistcomponent/atmlistcomponent.component';
 import { MatCardModule } from '@angular/material/card';
-
-
 @NgModule({
   declarations: [
-    AtmCardComponent,
-    AtmlistcomponentComponent
+    RtocomponentComponent,
+    RtolistcomponentComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +26,7 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatButtonModule,
     MatCardModule
+
   ]
 })
-export class AtmmoduleModule { }
+export class RtomoduleModule { }

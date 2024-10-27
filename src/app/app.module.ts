@@ -24,6 +24,8 @@ import { FoodmoduleModule } from './foodmodule/foodmodule.module';
 
 import { MedicalmoduleModule } from './medicalmodule/medicalmodule.module';
 
+import { RtomoduleModule } from './rtomodule/rtomodule.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,8 @@ import { MedicalmoduleModule } from './medicalmodule/medicalmodule.module';
     AtmmoduleModule,
     OttModule,
     FoodmoduleModule,
-    MedicalmoduleModule
+    MedicalmoduleModule,
+    RtomoduleModule
   ],
   providers: [
     provideHttpClient(),

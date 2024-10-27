@@ -11,6 +11,8 @@ import { OttcomponentComponent } from './ottmodule/ottcomponent/ottcomponent.com
 import { OttlistcomponentComponent } from './ottmodule/ottlistcomponent/ottlistcomponent.component';
 import { MedicalcomponentComponent } from './medicalmodule/medicalcomponent/medicalcomponent.component';
 import { MedicallistcomponentComponent } from './medicalmodule/medicallistcomponent/medicallistcomponent.component';
+import { RtocomponentComponent } from './rtomodule/rtocomponent/rtocomponent.component';
+import { RtolistcomponentComponent } from './rtomodule/rtolistcomponent/rtolistcomponent.component';
 const routes: Routes = [
   {path:"",component:DashboardComponent},
   {path:"home",component:HomeComponent,canActivate: [AuthGuard]},
@@ -26,6 +28,10 @@ const routes: Routes = [
   { path: 'medical/add', component: MedicalcomponentComponent,canActivate: [AuthGuard] }, 
   { path: 'medical/list/:familyid', component: MedicallistcomponentComponent,canActivate:[AuthGuard] },
   { path: 'medical/edit/:number', component: MedicalcomponentComponent ,canActivate: [AuthGuard]},
+  { path: 'rto/add', component: RtocomponentComponent,canActivate: [AuthGuard] }, 
+  { path: 'rto/list/:familyid', component: RtolistcomponentComponent,canActivate:[AuthGuard] },
+  { path: 'rto/edit/:number', component: RtocomponentComponent ,canActivate: [AuthGuard]},
+
 
 
   //always give ** pat at the end
