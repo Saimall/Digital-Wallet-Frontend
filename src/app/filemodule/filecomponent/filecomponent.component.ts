@@ -75,9 +75,9 @@ export class FilecomponentComponent implements OnInit {
       const formData = new FormData();
 
       if (this.file) {
-        formData.append('pdfFile', this.file, this.file.name); // Append the file
+        formData.append('pdfFile', this.file, this.file.name); 
       }
-      formData.append('number', this.fileForm.get('number')?.value); // Append other attributes
+      formData.append('number', this.fileForm.get('number')?.value); 
       formData.append('entityname', this.fileForm.get('entityname')?.value);
       formData.append('description', this.fileForm.get('description')?.value);
       formData.append('name', this.fileForm.get('name')?.value);    
@@ -90,8 +90,8 @@ export class FilecomponentComponent implements OnInit {
       request.subscribe({
         next: () => {
           this.snackBar.open('File uploaded successfully!', 'Close', { duration: 3000 });
-          this.router.navigate(['/files/list']); // Redirect after save
-          this.fileForm.reset(); // Reset form after submission
+          this.router.navigate(['/files/list']); 
+          this.fileForm.reset(); 
         },
         error: (error) => {
           console.error('Upload failed', error);
