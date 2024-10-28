@@ -3,6 +3,6 @@ export interface FileModel {
         entityname: string;
         description?: string;
         name: string;
-        imageData: File; 
+        imageData: any | File; 
       }
       

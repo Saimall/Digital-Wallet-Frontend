@@ -1,48 +1,52 @@
-<form [formGroup]="fileForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="number">Number:</label>
-    <input id="number" formControlName="number" type="text" />
-    <div *ngIf="fileForm.get('number')?.invalid && fileForm.get('number')?.touched" class="error">
-      Number is required.
+<div class="atm-card-form">
+  <h4 class="form-title">{{ isEditMode ? 'Edit File Card' : 'Add File Card' }}</h4>
+  <form [formGroup]="fileForm" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Number</mat-label>
+        <input matInput formControlName="number" required />
+
+        <mat-error *ngIf="fileForm.get('number')?.hasError('required')">Number is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Entity Name:</mat-label>
+        <input matInput formControlName="entityname" required />
+
+        <mat-error *ngIf="fileForm.get('entityname')?.hasError('required')">EntityName is required.</mat-error>
+      </mat-form-field>
     </div>
-  </div>
 
-  <div>
-    <label for="entityname">Entity Name:</label>
-    <input id="entityname" formControlName="entityname" type="text" />
-    <div *ngIf="fileForm.get('entityname')?.invalid && fileForm.get('entityname')?.touched" class="error">
-      Entity name is required.
+    <div class="form-row">
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Description:</mat-label>
+        <input matInput formControlName="description" required />
+
+        <mat-error *ngIf="fileForm.get('description')?.hasError('required')">Description is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>File Name:</mat-label>
+        <input matInput formControlName="name" type="text" required />
+
+        <mat-error *ngIf="fileForm.get('name')?.hasError('required')">Name is required.</mat-error>
+      </mat-form-field>
+
     </div>
-  </div>
 
-  <div>
-    <label for="description">Description:</label>
-    <textarea id="description" formControlName="description"></textarea>
-  </div>
+    <div class="">
+      <!-- <label for="imageData" class="form-label">File:</label> -->
+      <input id="imageData" type="file" (change)="onFileChange($event)" class="form-input" placeholder="Upload File" />
+      <div *ngIf="fileForm.get('imageData')?.invalid && fileForm.get('imageData')?.touched" class="error">
+        File upload is required.
+      </div>
+    </div>    
+    <button mat-stroked-button color="primary" class="submit-button" type="submit">
+      <mat-icon>save</mat-icon>
+      {{ isEditMode ? 'Update Card' : 'Add Card' }}
+    </button>
+    
+  </form>
+</div>
 
-  <div>
-    <label for="name">File Name:</label>
-    <input id="name" formControlName="name" type="text" />
-    <div *ngIf="fileForm.get('name')?.invalid && fileForm.get('name')?.touched" class="error">
-      File name is required.
-    </div>
-  </div>
-
-  <div>
-    <label for="imageData">Upload File:</label>
-    <input id="imageData" type="file" (change)="onFileChange($event)" />
-    <div *ngIf="fileForm.get('imageData')?.invalid && fileForm.get('imageData')?.touched" class="error">
-      File upload is required.
-    </div>
-  </div>
-
-  <button type="submit" [disabled]="fileForm.invalid">Submit</button>
-</form>
-
-<!-- Add some styling for errors -->
-<style>
-  .error {
-    color: red;
-    font-size: 0.8em;
-  }
-</style>
