@@ -31,6 +31,7 @@ export class FilelistcomponentComponent {
   loadAtmCards() {
     this.familyid= Number(localStorage.getItem("familyid"));
     this.fileService.getFileCards(this.familyid).subscribe(cards => {
+      console.log(cards);
       this.fileCards = cards;
     });
   }
