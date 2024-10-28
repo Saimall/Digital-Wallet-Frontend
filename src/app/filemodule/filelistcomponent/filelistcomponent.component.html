@@ -13,7 +13,8 @@
         
         </mat-card-content>
         <mat-card-content>
-          <img src={{card.imageData}} alt="image not avalabile">
+          <img [src]="card.imageData" alt="Image not available">
+          <a href={{card.imageData}} download>Download Image</a>
         
         </mat-card-content>
         <mat-card-actions class="mat-card-actions">
