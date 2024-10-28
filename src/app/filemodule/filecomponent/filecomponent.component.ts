@@ -51,8 +51,15 @@ export class FilecomponentComponent {
   onSubmit() {
     if (this.fileForm.valid) {
       const formData = new FormData();
-      for (const key in this.fileForm.controls) {
-        formData.append(key, this.fileForm.controls[key].value);
+      formData.append('number', this.fileForm.get('number')?.value);
+      formData.append('entityname', this.fileForm.get('entityname')?.value);
+      formData.append('description', this.fileForm.get('description')?.value);
+      formData.append('name', this.fileForm.get('name')?.value);
+      
+      // Append the file
+      const file = this.fileForm.get('imageData')?.value;
+      if (file) {
+        formData.append('imageData', file, file.name);
       }
 
       if (this.isEditMode) {
