@@ -37,7 +37,7 @@ export class FilelistcomponentComponent {
   }
 
   editCard(card: any) {
-    this.router.navigate(['file/edit', card.number]);
+    this.router.navigate(['files/edit', card.number]);
   }
 
   deleteCard(cardnumber: number) {
