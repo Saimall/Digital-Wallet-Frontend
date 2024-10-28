@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/authenticationservice/authservice.service';
 import { FileservicesService } from '../../services/fileservice/fileservices.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class FilecomponentComponent implements OnInit {
     private fileService: FileservicesService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute // Inject ActivatedRoute
+    private route: ActivatedRoute ,// Inject ActivatedRoute
+    private authservice:AuthService
   ) {
     this.fileForm = this.fb.group({
       number: ['', Validators.required],
@@ -72,6 +74,7 @@ export class FilecomponentComponent implements OnInit {
 
   onSubmit() {
     if (this.fileForm.valid) {
+      const familyid:number = Number(localStorage.getItem("familyid"));
       const formData = new FormData();
 
       if (this.file) {
@@ -88,9 +91,12 @@ export class FilecomponentComponent implements OnInit {
         : this.fileService.addFileCard(formData);
       
       request.subscribe({
+        
         next: () => {
           this.snackBar.open('File uploaded successfully!', 'Close', { duration: 3000 });
-          this.router.navigate(['/files/list']); 
+         
+          this.router.navigate(['/files/list',familyid]); 
+     
           this.fileForm.reset(); 
         },
         error: (error) => {
