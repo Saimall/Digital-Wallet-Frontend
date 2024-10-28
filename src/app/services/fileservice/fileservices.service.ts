@@ -21,8 +21,8 @@ export class FileservicesService {
     });
   }
 
-  addFileCard(fileCard: FormData): Observable<FileModel> {
-    return this.http.post<FileModel>(`${this.baseUrl}/add`, fileCard, { headers: this.getHeaders() });
+  addFileCard(formData: FormData): Observable<FileModel> {
+    return this.http.post<FileModel>(`${this.baseUrl}/add`, formData, { headers: this.getHeaders() });
   }
   getFilecard(number:number):Observable<FileModel>{
    return this.http.get<FileModel>(`${this.baseUrl}/getbynumber/${number}`,{headers: this.getHeaders()}); 
@@ -32,8 +32,8 @@ export class FileservicesService {
     return this.http.get<FileModel[]>(`${this.baseUrl}/get/${familyid}`, { headers: this.getHeaders() });
   }
 
-  updateFileCard(number: number, fileCard: FormData): Observable<FileModel> {
-    return this.http.put<FileModel>(`${this.baseUrl}/update/${number}`, fileCard, { headers: this.getHeaders() });
+  updateFileCard(number: number, formData: FormData): Observable<FileModel> {
+    return this.http.put<FileModel>(`${this.baseUrl}/update/${number}`, formData, { headers: this.getHeaders() });
   }
 
   deleteFileCard(number: number): Observable<void> {

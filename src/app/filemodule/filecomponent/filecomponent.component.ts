@@ -76,9 +76,9 @@ export class FilecomponentComponent implements OnInit {
       for (const key in this.fileForm.controls) {
         const value = this.fileForm.controls[key].value;
         if (key === 'imageData') {
-          formData.append(key, value, value.name); // Append file with name
+          formData.append("pdfFile", value, value.name); // Append file with name
         } else {
-          formData.append(key, value);
+          formData.append("pdfFile", value);
         }
       }
 
@@ -86,7 +86,7 @@ export class FilecomponentComponent implements OnInit {
       const request = this.isEditMode 
         ? this.fileService.updateFileCard(this.fileId, formData) 
         : this.fileService.addFileCard(formData);
-      console.log(formData.get("imageData"))
+      
       request.subscribe({
         next: () => {
           this.snackBar.open('File uploaded successfully!', 'Close', { duration: 3000 });
