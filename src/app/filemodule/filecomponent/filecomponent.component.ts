@@ -51,17 +51,15 @@ export class FilecomponentComponent {
   onSubmit() {
     if (this.fileForm.valid) {
       const formData = new FormData();
-      formData.append('number', this.fileForm.get('number')?.value);
-      formData.append('entityname', this.fileForm.get('entityname')?.value);
-      formData.append('description', this.fileForm.get('description')?.value);
-      formData.append('name', this.fileForm.get('name')?.value);
-      
-      // Append the file
-      const file = this.fileForm.get('imageData')?.value;
-      if (file) {
-        formData.append('imageData', file, file.name);
+     
+      for (const key in this.fileForm.controls) {
+        const value = this.fileForm.controls[key].value;
+        if (key === 'imageData') {
+          formData.append(key, value, value.name); // Append file with name
+        } else {
+          formData.append(key, value);
+        }
       }
-
       if (this.isEditMode) {
         this.fileService.updateFileCard(this.fileId, formData).subscribe(() => {
           this.router.navigate(['/files/']); // Redirect after save
