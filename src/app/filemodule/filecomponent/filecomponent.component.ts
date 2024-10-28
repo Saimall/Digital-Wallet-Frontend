@@ -30,7 +30,7 @@ export class FilecomponentComponent implements OnInit {
       entityname: ['', Validators.required],
       description: [''],
       name: ['', Validators.required],
-      imageData: [null, Validators.required] // For file upload
+      imageData: [null, Validators.required], // For file upload
     });
   }
 
@@ -84,6 +84,7 @@ export class FilecomponentComponent implements OnInit {
       formData.append('entityname', this.fileForm.get('entityname')?.value);
       formData.append('description', this.fileForm.get('description')?.value);
       formData.append('name', this.fileForm.get('name')?.value);    
+      formData.append('familyid',String(familyid));
 
       this.isLoading = true; 
       const request = this.isEditMode 
