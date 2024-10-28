@@ -38,7 +38,7 @@ export class FilecomponentComponent implements OnInit {
   ngOnInit(): void {
     // Subscribe to route parameters
     this.route.params.subscribe(params => {
-      this.number = +params['id']; // Assuming the route parameter is 'id'
+      this.number = +params['number']; // Assuming the route parameter is 'id'
       if (this.number) {
         this.isEditMode = true;
         this.fileService.getFilecard(this.number).subscribe( cards=>{
