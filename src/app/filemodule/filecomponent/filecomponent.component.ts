@@ -41,9 +41,11 @@ export class FilecomponentComponent {
 
   onFileChange(event: any) {
     const file = event.target.files[0];
-    this.fileForm.patchValue({
-      imageData: file
-    });
+    if (file) {
+      this.fileForm.patchValue({
+        imageData: file 
+      });
+    }
   }
 
   onSubmit() {
