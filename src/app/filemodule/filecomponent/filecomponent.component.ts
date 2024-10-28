@@ -29,7 +29,7 @@ export class FilecomponentComponent implements OnInit {
     this.fileForm = this.fb.group({
       number: ['', Validators.required],
       entityname: ['', Validators.required],
-      description: [''],
+      description: ['',Validators.required],
       name: ['', Validators.required],
       imageData: [null, Validators.required], // For file upload
     });
