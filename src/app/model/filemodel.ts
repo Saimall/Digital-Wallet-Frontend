@@ -1,8 +1,8 @@
-export interface Filemodel {
+export interface FileModel {
         number: number;
         entityname: string;
-        description: string;
+        description?: string;
         name: string;
-        imageData: string; 
-        
-}
+        imageData: File; 
+      }
+      

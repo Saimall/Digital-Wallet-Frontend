@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/authenticationservice/authservice.service';
 import { FileservicesService } from '../../services/fileservice/fileservices.service';
-import { Filemodel } from '../../model/filemodel';
+import { FileModel } from '../../model/filemodel';
 
 @Component({
   selector: 'app-filecomponent',
@@ -12,130 +12,54 @@ import { Filemodel } from '../../model/filemodel';
   styleUrl: './filecomponent.component.css'
 })
 export class FilecomponentComponent {
-  fileform: FormGroup;
+  fileForm: FormGroup;
   isEditMode = false;
-  cardNumber: number=0;
+  fileId: number=0; // Assuming you'll get this from route params or similar
 
   constructor(
     private fb: FormBuilder,
     private fileService: FileservicesService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authservice:AuthService,
-    private snackbar:MatSnackBar
+    private router: Router
   ) {
-    this.fileform = this.fb.group({
-      number: [null, Validators.required],
+    this.fileForm = this.fb.group({
+      number: ['', Validators.required],
       entityname: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [''],
       name: ['', Validators.required],
-      imageData: ['', Validators.required],
-     
+      imageData: [null, Validators.required] // For file upload
     });
   }
 
-  selectedFile: File | null = null;
   ngOnInit(): void {
     
-    this.route.paramMap.subscribe(params => {
-      const cardNumberParam = params.get('number');
-      console.log(cardNumberParam);
-      if (cardNumberParam !== null) {
-        this.cardNumber = +cardNumberParam; //we can convert into number 
-        this.isEditMode = true;
-        this.loadAtmCard(this.cardNumber);
-      }
-    });
-  }
-  
-
-  loadAtmCard(cardNumber: number): void {
-    this.fileService.getFilecard(cardNumber).subscribe(cards => {
-      const card:Filemodel = cards 
-      this.fileform.patchValue({ 
-        number: card.number,
-        entityname: card.entityname,
-       description: card.description,
-        name: card.name,
-        imageData: card.imageData
+    if (this.isEditMode) {
+      this.fileService.getFilecard(this.fileId).subscribe(file => {
+        this.fileForm.patchValue(file);
       });
-    });
-  }
-
-
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file && file.imageType === 'application/pdf') {
-      this.selectedFile = file;
-      this.fileform.patchValue({ file: file.imageData }); 
-    } else {
-      alert('Please upload a PDF file.');
-      this.selectedFile = null;
     }
   }
 
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    this.fileForm.patchValue({
+      imageData: file
+    });
+  }
 
-  onSubmit(): void {
-console.log("onsubmit calling!!!");
-    console.log(this.fileform)
-    if (this.fileform.valid) {
-      const familyid:number = Number(localStorage.getItem("familyid"));
+  onSubmit() {
+    if (this.fileForm.valid) {
+      const formData = new FormData();
+      for (const key in this.fileForm.controls) {
+        formData.append(key, this.fileForm.controls[key].value);
+      }
+
       if (this.isEditMode) {
-
-        const updatedData = {
-          ...this.fileform.value, 
-          familyid: localStorage.getItem("familyid")
-        };
-        this.fileService.updateFileCard(this.cardNumber, updatedData).subscribe({
-          next:(reponse)=>{
-          this.snackbar.open('Card Updated successfully!', 'Close', {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass:"success-snackbar"
-          });
-            
-          this.router.navigate(['/files/list',familyid]);
-        },
-        error:error=>{
-          this.snackbar.open('Error while updating the card', 'Close', {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass:"error-snackbar"
-          });
-
-        }
+        this.fileService.updateFileCard(this.fileId, formData).subscribe(() => {
+          this.router.navigate(['/files/']); // Redirect after save
         });
-        
       } else {
-        const addData = {
-          ...this.fileform.value, 
-          familyid: localStorage.getItem("familyid")
-        };
-       
-        this.fileService.addFileCard(addData).subscribe( {
-          next:(response)=>{
-          this.snackbar.open('Card Added successfully!', 'Close', {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass:"success-snackbar"
-          });
-          this.router.navigate(['/file/list',familyid]); // Navigate to list after adding
-          },
-          error:error=>{
-              this.snackbar.open('Error while adding the card', 'Close', {
-                duration: 3000,
-                horizontalPosition: 'right',
-                verticalPosition: 'top',
-                panelClass:"error-snackbar"
-              });
-                
-              this.router.navigate(['/file/list',familyid]);
-            },
-           
-          
+        this.fileService.addFileCard(formData).subscribe(() => {
+          this.router.navigate(['/files/list']); // Redirect after save
         });
       }
     }

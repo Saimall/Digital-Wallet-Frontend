@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../authenticationservice/authservice.service';
-import { Filemodel } from '../../model/filemodel';
+import { FileModel } from '../../model/filemodel';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,19 +21,19 @@ export class FileservicesService {
     });
   }
 
-  addFileCard(fileCard: Filemodel): Observable<Filemodel> {
-    return this.http.post<Filemodel>(`${this.baseUrl}/add`, fileCard, { headers: this.getHeaders() });
+  addFileCard(fileCard: FormData): Observable<FileModel> {
+    return this.http.post<FileModel>(`${this.baseUrl}/add`, fileCard, { headers: this.getHeaders() });
   }
-  getFilecard(number:number):Observable<Filemodel>{
-   return this.http.get<Filemodel>(`${this.baseUrl}/getbynumber/${number}`,{headers: this.getHeaders()}); 
-  }
-
-  getFileCards(familyid: number): Observable<Filemodel[]> {
-    return this.http.get<Filemodel[]>(`${this.baseUrl}/get/${familyid}`, { headers: this.getHeaders() });
+  getFilecard(number:number):Observable<FileModel>{
+   return this.http.get<FileModel>(`${this.baseUrl}/getbynumber/${number}`,{headers: this.getHeaders()}); 
   }
 
-  updateFileCard(number: number, fileCard: Filemodel): Observable<Filemodel> {
-    return this.http.put<Filemodel>(`${this.baseUrl}/update/${number}`, fileCard, { headers: this.getHeaders() });
+  getFileCards(familyid: number): Observable<FileModel[]> {
+    return this.http.get<FileModel[]>(`${this.baseUrl}/get/${familyid}`, { headers: this.getHeaders() });
+  }
+
+  updateFileCard(number: number, fileCard: FormData): Observable<FileModel> {
+    return this.http.put<FileModel>(`${this.baseUrl}/update/${number}`, fileCard, { headers: this.getHeaders() });
   }
 
   deleteFileCard(number: number): Observable<void> {
