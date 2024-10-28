@@ -30,7 +30,7 @@
 
   <div>
     <label for="imageData">Upload File:</label>
-    <input id="imageData" type="file" (change)="onFileChange($event)" formControlName="imageData" />
+    <input id="imageData" type="file" (change)="onFileChange($event)" />
     <div *ngIf="fileForm.get('imageData')?.invalid && fileForm.get('imageData')?.touched" class="error">
       File upload is required.
     </div>

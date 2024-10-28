@@ -11,6 +11,7 @@ import { FileservicesService } from '../../services/fileservice/fileservices.ser
 })
 export class FilecomponentComponent implements OnInit {
   fileForm: FormGroup;
+  file:File|null=null;
   isEditMode = false;
   fileId: number = 0; // To hold the file ID
   isLoading = false; // Loading state
@@ -61,7 +62,7 @@ export class FilecomponentComponent implements OnInit {
         this.snackBar.open('Invalid file type. Please upload a PDF file.', 'Close', { duration: 3000 });
         return;
       }
-
+      this.file=file;
       this.fileForm.patchValue({
         imageData: file
       });
@@ -73,16 +74,15 @@ export class FilecomponentComponent implements OnInit {
     if (this.fileForm.valid) {
       const formData = new FormData();
 
-      for (const key in this.fileForm.controls) {
-        const value = this.fileForm.controls[key].value;
-        if (key === 'imageData') {
-          formData.append("pdfFile", value, value.name); // Append file with name
-        } else {
-          formData.append("pdfFile", value);
-        }
+      if (this.file) {
+        formData.append('pdfFile', this.file, this.file.name); // Append the file
       }
+      formData.append('number', this.fileForm.get('number')?.value); // Append other attributes
+      formData.append('entityname', this.fileForm.get('entityname')?.value);
+      formData.append('description', this.fileForm.get('description')?.value);
+      formData.append('name', this.fileForm.get('name')?.value);    
 
-      this.isLoading = true; // Set loading state
+      this.isLoading = true; 
       const request = this.isEditMode 
         ? this.fileService.updateFileCard(this.fileId, formData) 
         : this.fileService.addFileCard(formData);
