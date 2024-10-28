@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FileModel } from '../../model/filemodel';
 import { AuthService } from '../../services/authenticationservice/authservice.service';
 import { FileservicesService } from '../../services/fileservice/fileservices.service';
 
@@ -14,7 +15,7 @@ export class FilecomponentComponent implements OnInit {
   fileForm: FormGroup;
   file:File|null=null;
   isEditMode = false;
-  fileId: number = 0; // To hold the file ID
+  number: number = 0; // To hold the file ID
   isLoading = false; // Loading state
 
   constructor(
@@ -37,18 +38,21 @@ export class FilecomponentComponent implements OnInit {
   ngOnInit(): void {
     // Subscribe to route parameters
     this.route.params.subscribe(params => {
-      this.fileId = +params['id']; // Assuming the route parameter is 'id'
-      if (this.fileId) {
+      this.number = +params['id']; // Assuming the route parameter is 'id'
+      if (this.number) {
         this.isEditMode = true;
-        this.fileService.getFilecard(this.fileId).subscribe({
-          next: (file) => {
-            this.fileForm.patchValue(file);
-          },
-          error: (err) => {
-            console.error('Error fetching file data', err);
-            this.snackBar.open('Error fetching file data. Please try again.', 'Close', { duration: 3000 });
-          }
-        });
+        this.fileService.getFilecard(this.number).subscribe( cards=>{
+          const card:FileModel=cards;
+          
+            this.fileForm.patchValue({
+             entityname: card.entityname,
+             description:card.description,
+             imageData:card.imageData,
+             number:card.number,
+             name:card.name
+            });
+
+          })
       }
     });
   }
@@ -88,7 +92,7 @@ export class FilecomponentComponent implements OnInit {
 
       this.isLoading = true; 
       const request = this.isEditMode 
-        ? this.fileService.updateFileCard(this.fileId, formData) 
+        ? this.fileService.updateFileCard(this.number, formData) 
         : this.fileService.addFileCard(formData);
       
       request.subscribe({
