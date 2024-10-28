@@ -1,25 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../services/authenticationservice/authservice.service';
 import { FileservicesService } from '../../services/fileservice/fileservices.service';
-import { FileModel } from '../../model/filemodel';
 
 @Component({
   selector: 'app-filecomponent',
   templateUrl: './filecomponent.component.html',
-  styleUrl: './filecomponent.component.css'
+  styleUrls: ['./filecomponent.component.css']
 })
-export class FilecomponentComponent {
+export class FilecomponentComponent implements OnInit {
   fileForm: FormGroup;
   isEditMode = false;
-  fileId: number=0; // Assuming you'll get this from route params or similar
+  fileId: number = 0; // To hold the file ID
+  isLoading = false; // Loading state
 
   constructor(
     private fb: FormBuilder,
     private fileService: FileservicesService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute // Inject ActivatedRoute
   ) {
     this.fileForm = this.fb.group({
       number: ['', Validators.required],
@@ -31,27 +32,47 @@ export class FilecomponentComponent {
   }
 
   ngOnInit(): void {
-    
-    if (this.isEditMode) {
-      this.fileService.getFilecard(this.fileId).subscribe(file => {
-        this.fileForm.patchValue(file);
-      });
-    }
+    // Subscribe to route parameters
+    this.route.params.subscribe(params => {
+      this.fileId = +params['id']; // Assuming the route parameter is 'id'
+      if (this.fileId) {
+        this.isEditMode = true;
+        this.fileService.getFilecard(this.fileId).subscribe({
+          next: (file) => {
+            this.fileForm.patchValue(file);
+          },
+          error: (err) => {
+            console.error('Error fetching file data', err);
+            this.snackBar.open('Error fetching file data. Please try again.', 'Close', { duration: 3000 });
+          }
+        });
+      }
+    });
   }
 
-  onFileChange(event: any) {
-    const file = event.target.files[0];
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
     if (file) {
+      // Allow only PDF files
+      const allowedTypes = ['application/pdf'];
+      if (!allowedTypes.includes(file.type)) {
+        this.snackBar.open('Invalid file type. Please upload a PDF file.', 'Close', { duration: 3000 });
+        return;
+      }
+
       this.fileForm.patchValue({
-        imageData: file 
+        imageData: file
       });
+      this.fileForm.get('imageData')?.updateValueAndValidity(); // Update validity
     }
   }
 
   onSubmit() {
     if (this.fileForm.valid) {
       const formData = new FormData();
-     
+
       for (const key in this.fileForm.controls) {
         const value = this.fileForm.controls[key].value;
         if (key === 'imageData') {
@@ -60,15 +81,26 @@ export class FilecomponentComponent {
           formData.append(key, value);
         }
       }
-      if (this.isEditMode) {
-        this.fileService.updateFileCard(this.fileId, formData).subscribe(() => {
-          this.router.navigate(['/files/']); // Redirect after save
-        });
-      } else {
-        this.fileService.addFileCard(formData).subscribe(() => {
+
+      this.isLoading = true; // Set loading state
+      const request = this.isEditMode 
+        ? this.fileService.updateFileCard(this.fileId, formData) 
+        : this.fileService.addFileCard(formData);
+      console.log(formData.get("imageData"))
+      request.subscribe({
+        next: () => {
+          this.snackBar.open('File uploaded successfully!', 'Close', { duration: 3000 });
           this.router.navigate(['/files/list']); // Redirect after save
-        });
-      }
+          this.fileForm.reset(); // Reset form after submission
+        },
+        error: (error) => {
+          console.error('Upload failed', error);
+          this.snackBar.open('Upload failed. Please try again.', 'Close', { duration: 3000 });
+        },
+        complete: () => {
+          this.isLoading = false; // Reset loading state
+        }
+      });
     }
   }
 }
