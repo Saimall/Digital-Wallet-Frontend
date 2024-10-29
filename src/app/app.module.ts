@@ -21,12 +21,14 @@ import { MedicalmoduleModule } from './medicalmodule/medicalmodule.module';
 import { RtomoduleModule } from './rtomodule/rtomodule.module';
 
 import { FilemoduleModule } from './filemodule/filemodule.module';
+import { ErrorcomponentComponent } from './errorcomponent/errorcomponent.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    HomeComponent
+    HomeComponent,
+    ErrorcomponentComponent
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,8 @@ import { RtocomponentComponent } from './rtomodule/rtocomponent/rtocomponent.com
 import { RtolistcomponentComponent } from './rtomodule/rtolistcomponent/rtolistcomponent.component';
 import { FilecomponentComponent } from './filemodule/filecomponent/filecomponent.component';
 import { FilelistcomponentComponent } from './filemodule/filelistcomponent/filelistcomponent.component';
+import { ErrorcomponentComponent } from './errorcomponent/errorcomponent.component';
+
 const routes: Routes = [
   {path:"",component:DashboardComponent},
   {path:"home",component:HomeComponent,canActivate: [AuthGuard]},
@@ -36,11 +38,11 @@ const routes: Routes = [
   { path: 'files/add', component: FilecomponentComponent,canActivate: [AuthGuard] }, 
   { path: 'files/list/:familyid', component: FilelistcomponentComponent,canActivate:[AuthGuard] },
   { path: 'files/edit/:number', component: FilecomponentComponent ,canActivate: [AuthGuard]},
-
+ 
 
 
   //always give ** pat at the end
-    {path:"**",component:DashboardComponent,canActivate: [AuthGuard]},
+    {path:"**",component:ErrorcomponentComponent,canActivate: [AuthGuard]},
 ];
 
 @NgModule({
