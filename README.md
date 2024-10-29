@@ -40,9 +40,9 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 # **DEMO SCREEN SHOTS**:
 
 ---
-> **Home Page:** > <img width="500"  height="300" alt="image" src="https://github.com/user-attachments/assets/fba55fc7-1e06-4ae2-8149-2c6a9dda9db9"><br>
-> **Add Card Page:** > <img width="500"  height="300" alt="image" src="https://github.com/user-attachments/assets/a9e56acf-8712-43de-b672-4b6ed1632301"><br>
-> **Display Card Page:** > <img width="500"  height="300" alt="image" src="https://github.com/user-attachments/assets/1f23bdfe-57ce-4cbb-aa79-43a6a1167210"><br>
+> **Home Page:** > <br> <img width="500"  height="300" alt="image" src="https://github.com/user-attachments/assets/fba55fc7-1e06-4ae2-8149-2c6a9dda9db9"><br>
+> **Add Card Page:** > <br><img width="500"  height="300" alt="image" src="https://github.com/user-attachments/assets/a9e56acf-8712-43de-b672-4b6ed1632301"><br>
+> **Display Card Page:** > <br> <img width="500"  height="300" alt="image" src="https://github.com/user-attachments/assets/1f23bdfe-57ce-4cbb-aa79-43a6a1167210"><br>
 
 ---
 ### Prerequisites
